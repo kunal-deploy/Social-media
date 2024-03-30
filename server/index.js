@@ -20,6 +20,16 @@ app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy( { policy : "cross-origin" } )); // allows you to interact with data from different origins that are domains , sub-domains , ports and set policies/rules for that interactions
 app.use(morgan("common")); // setting the HTTP information format to be common 
 app.use( bodyParser.json( {limit : "30mb" , extended : true})); // extended = true allows you to parse complex json data structures which includes the commons ones(strings ,integers , etc.) but not limited to them
-app.use( bodyParser.urlencoded( { limit :"30mb" , extended: true}));
+app.use( bodyParser.urlencoded( { limit :"30mb" , extended: true})); // It is specifically designed to parse URL-encoded data in the request body. URL-encoded data is typically sent by browsers when submitting form data.
 app.use( cors()) ; //invokes the cross origin sharing policies in line 20
-app.use()
+app.use( "/assets" , express.static(path.join( __dirname , 'public/assets'))); // assigns a subdomain assets and stores files received in there to the directory received from dirname and further path ahead that is public/assets
+
+//STORAGE
+const storage = multer.diskStorage({
+    destination :   function( req , file , cb){
+        cb( null , "public/assets "); //The cb (callback) function is provided with two arguments: err and the path to the destination directory ("public/assets" in this case). If there's an error, you can pass the error to cb(err), otherwise, pass null.
+    },
+    filename : function( req , file , cb  ){ //This option is a function that determines the name of the uploaded file when it's saved to the server. In your code, the filename is set to file.originalname, which means the uploaded file will retain its original name.
+        cb(null , file.originalname);  // he cb function provided to filename is also a callback function that should be called with either an error (if any) or the filename. In your case, you pass null for the error (cb(null, file.originalname)).
+    }
+})
