@@ -12,3 +12,17 @@ npm i express body-parser bcrypt cors dotenv gridfs-stream multer multer-gridfs-
 (# Morgan can access all the information from an HTTP request and response)
 (# JSON Web Token (JWT) is an open standard that provides a compressed and independent method for secure data transfer among parties as a JSON object.)
 (# Mongoose is a JavaScript Object Document Modeling (ODM) library for MongoDB. It provides a schema-based solution to model application data, including built-in features like type casting, validation, query building, and business logic hooks , Mongoose is designed to work in an asynchronous environment.)
+
+Controllers have Authentication and handles it 
+Models have data format 
+Middleware handles authorization
+Routes handles all the subdomains i.e. /auth/login , /auth/register , etc.
+
+
+
+
+
+Authentication verifies a user's identity, while authorization determines what a user can access.
+
+Difference between mongoose and mongodb ? Mongoose stored the data that is in a consistent format and doesn't change while mongodb stores data that needs flexibility i.e. data or its type changes frequently
+

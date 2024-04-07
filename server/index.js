@@ -8,6 +8,9 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
+import { register } from "./controllers/auth"; 
+import authRoutes from "./routes/auth";
+import userRoutes from "./routes/users";
 
 // Configurations
 const __filename = fileURLToPath( import.meta.url ); // we use (type : modules) in package.json so every file is treated as module thus to get path for that as normal we use this 
@@ -35,6 +38,12 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage}); // Variable created to upload a file via variable storage 
 
+//ROUTING WITH FILES // This is not in routes folder because we needed the upload function that is to be used in here
+app.post("/auth/register" , upload.single("picture") , register); // we created a subdomain/route called auth/register where our picture will be stored via the middleware upload that then access the storage
+
+//ROUTES
+app.use( "/auth" , authRoutes);
+app.use( "/users" , userRoutes);
 // MONGOOSE SETUP 
 const PORT = process.env.PORT || 6001 ;
 mongoose.connect( process.env.MONGO_URL , {
