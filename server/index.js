@@ -1,4 +1,3 @@
-import { Express } from "express";
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
@@ -36,16 +35,11 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage}); // Variable created to upload a file via variable storage 
 
-// KRnBYopzkRLM1et7 , Kunal_dabas
-
-
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://Kunal_Dabas:KRnBYopzkRLM1et7@socialmedia.tbfqkor.mongodb.net/?retryWrites=true&w=majority&appName=SocialMedia";
-
 // MONGOOSE SETUP 
 const PORT = process.env.PORT || 6001 ;
 mongoose.connect( process.env.MONGO_URL , {
-    useNewUrlParse : true , 
+    // NOT NEEDED IN THE NEW VERSION OF NODE
+    useNewUrlParser : true , 
     useUnifiedTopology : true ,
 }).then( () => {
     app.listen( PORT , () => console.log(`SERVER Port at : ${PORT}`));
