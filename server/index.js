@@ -33,3 +33,20 @@ const storage = multer.diskStorage({
         cb(null , file.originalname);  // he cb function provided to filename is also a callback function that should be called with either an error (if any) or the filename. In your case, you pass null for the error (cb(null, file.originalname)).
     }
 })
+
+const upload = multer({storage}); // Variable created to upload a file via variable storage 
+
+// KRnBYopzkRLM1et7 , Kunal_dabas
+
+
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://Kunal_Dabas:KRnBYopzkRLM1et7@socialmedia.tbfqkor.mongodb.net/?retryWrites=true&w=majority&appName=SocialMedia";
+
+// MONGOOSE SETUP 
+const PORT = process.env.PORT || 6001 ;
+mongoose.connect( process.env.MONGO_URL , {
+    useNewUrlParse : true , 
+    useUnifiedTopology : true ,
+}).then( () => {
+    app.listen( PORT , () => console.log(`SERVER Port at : ${PORT}`));
+}).catch( error => { `${error} did not connect`});
