@@ -46,19 +46,19 @@ export const register = async( req , res ) => {
 export const login = async( req , res) =>{
   try{
     const { email , password }  = req.body;
-    const User = await User.findOne( { email : email });
-    if( !User ){
+    const user = await User.findOne( { email : email });
+    if( !user ){
       return res.status(400).json( {msg : "User does not exist"} );
     }
 
-    const isMatch = await bcrypt.compare( password , User.password );
+    const isMatch = await bcrypt.compare( password , user.password );
     if( !isMatch ){
       return res.status(400).json( {msg : "Invalid credentials ! "} );
     }
 
-    const token = jwt.sign( { id : User._id } , process.env.JWT_SECRET );
-    delete User.password ; // Making sure that password doesn't get sent back to front end
-    res.status(200).json({ token , User});
+    const token = jwt.sign( { id : user._id } , process.env.JWT_SECRET );
+    delete user.password ; // Making sure that password doesn't get sent back to front end
+    res.status(200).json({ token , user });
 
   } catch( err ){
     res.status(500).json({ error: err.message });
