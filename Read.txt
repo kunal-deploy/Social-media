@@ -19,7 +19,12 @@ Middleware handles authorization
 Routes handles all the subdomains i.e. /auth/login , /auth/register , etc.
 
 
-
+npm i react-redux @reduxjs/toolkit redux-persist react-dropzone dotenv formik yup react-router-dom@6 @mui/material @emotion/react @emotion/styled @mui/icons-material
+(# Redux gives you a single place (the store) to store and manage your app's data. This means no more passing data through props between different components, making your code cleaner and more organized. )
+(# redux-persist allows you to store user and token information locally so that frontend is always somewhat loaded )
+(# react-dropzone handles file uploads as well as its handling to send it to backend)
+(# formik for form handling)
+(# yup for validation)
 
 
 Authentication verifies a user's identity, while authorization determines what a user can access.
