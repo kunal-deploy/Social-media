@@ -1,0 +1,1 @@
+In source , state folder is used to hold redux toolkit which handles all states e.g. useStates
