@@ -35,7 +35,7 @@ app.use( "/assets" , express.static(path.join( __dirname , 'public/assets'))); /
 //STORAGE
 const storage = multer.diskStorage({
     destination :   function( req , file , cb){
-        cb( null , "public/assets "); //The cb (callback) function is provided with two arguments: err and the path to the destination directory ("public/assets" in this case). If there's an error, you can pass the error to cb(err), otherwise, pass null.
+        cb( null , "public/assets"); //The cb (callback) function is provided with two arguments: err and the path to the destination directory ("public/assets" in this case). If there's an error, you can pass the error to cb(err), otherwise, pass null.
     },
     filename : function( req , file , cb  ){ //This option is a function that determines the name of the uploaded file when it's saved to the server. In your code, the filename is set to file.originalname, which means the uploaded file will retain its original name.
         cb(null , file.originalname);  // he cb function provided to filename is also a callback function that should be called with either an error (if any) or the filename. In your case, you pass null for the error (cb(null, file.originalname)).
@@ -61,7 +61,7 @@ const PORT = process.env.PORT || 6001 ;
 mongoose.connect( process.env.MONGO_URL 
 ).then( () => {
     app.listen( PORT , () => console.log(`SERVER Port at : ${PORT}`));
-    User.insertMany( users );
-    Post.insertMany( posts ); // Ran these two lines once to upload data to mongodb
+    // User.insertMany( users );
+    // Post.insertMany( posts ); // Ran these two lines once to upload data to mongodb
 
 }).catch( error => { `${error} did not connect`});

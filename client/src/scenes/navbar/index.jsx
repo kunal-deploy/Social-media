@@ -8,7 +8,6 @@ import {
   MenuItem,
   FormControl,
   useTheme,
-  useMediaQuery,
 } from "@mui/material";
 import {
   Search,
@@ -26,10 +25,10 @@ import { useNavigate } from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
 
 const Navbar = () => {
-  const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
+  // const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
   const dispatch = useDispatch(); // used to dispatch actions to the Redux store
   const navigate = useNavigate();
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user); // used to fetch details from redux of user 
 //   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)"); Not currently used  ,  to support mobile users 
 
   const theme = useTheme();
@@ -38,8 +37,8 @@ const Navbar = () => {
   const background = theme.palette.background.default;
   const primaryLight = theme.palette.primary.light;
   const alt = theme.palette.background.alt;
-  const fullName = `Daemon King`;
-//   const fullName = `${user.firstName} ${user.lastName}`;
+  // const fullName = `Daemon King`;
+  const fullName = `${user.firstName} ${user.lastName}`;
 
   return (
     <FlexBetween padding="1rem 6%" backgroundColor={alt}>

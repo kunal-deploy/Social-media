@@ -5,6 +5,7 @@ import User from "../models/User.js";
 //  REGISTER USER FUNCTION 
 // AUTHENTICATION 
 export const register = async( req , res ) => {
+    console.log("here");
     try{
         const {
             firstName,
@@ -16,26 +17,26 @@ export const register = async( req , res ) => {
             location,
             occupation,
           } = req.body;
-
+          // console.log("here1");
           const salt = await bcrypt.genSalt();   // getting a random salt from bcrypt to hash the password 
           const passwordHash = await bcrypt.hash(password , salt); // using salt received from above for hashing and thus encrypting the password
-
-          const newUser = new User([
+          // console.log("here2");
+          const newUser = new User({
             firstName,
             lastName,
             email,
-            passwordHash,
+            password:passwordHash,
             picturePath,
             friends,
             location,
             occupation,
-            viewedProfile = Math.floor( Math.random() * 10000),
-            impressions = Math.floor( Math.random() * 10000),
-          ])
-
+            viewedProfile : Math.floor( Math.random() * 10000),
+            impressions : Math.floor( Math.random() * 10000),
+          })
+          // console.log("here3");
           const savedUser = await newUser.save();
           res.status(201).json(savedUser);
-
+          // console.log("here5");
     } catch(err){
         res.status(500).json({ error: err.message }); // Returns the error that nodejs is showing  
     }
@@ -44,22 +45,24 @@ export const register = async( req , res ) => {
 
 
 export const login = async( req , res) =>{
+  // console.log("here");
   try{
+    console.log("here");
     const { email , password }  = req.body;
     const user = await User.findOne( { email : email });
     if( !user ){
       return res.status(400).json( {msg : "User does not exist"} );
     }
-
+    // console.log("here2");
     const isMatch = await bcrypt.compare( password , user.password );
     if( !isMatch ){
       return res.status(400).json( {msg : "Invalid credentials ! "} );
     }
-
+    // console.log("here3");
     const token = jwt.sign( { id : user._id } , process.env.JWT_SECRET );
     delete user.password ; // Making sure that password doesn't get sent back to front end
     res.status(200).json({ token , user });
-
+    // console.log("here4");
   } catch( err ){
     res.status(500).json({ error: err.message });
   }

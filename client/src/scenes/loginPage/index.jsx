@@ -1,5 +1,5 @@
 import { Box, Typography, useTheme } from "@mui/material";
-import Form from "./From";
+import Form from "./Form";
 
 const LoginPage = () => {
   const theme = useTheme();
@@ -9,13 +9,11 @@ const LoginPage = () => {
         width="100%"
         backgroundColor={theme.palette.background.alt}
         p="1rem 6%"
-        textAlign="center"
-      >
+        textAlign="center">
         <Typography fontWeight="bold" fontSize="32px" color="primary">
           Sociopedia
         </Typography>
       </Box>
-
       <Box
         width={"50%"}
         p="2rem"
