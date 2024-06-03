@@ -1,4 +1,13 @@
 ﻿# SocialMedia
+ ---------------------------------------------------------------------------------------------------------------------------
+npm i -g nodemon 
+---------------------------------------------------------------------------------------------------------------------------
+npm i express body-parser bcrypt cors dotenv gridfs-stream multer multer-gridfs-storage helmet morgan jsonwebtoken mongoose
+---------------------------------------------------------------------------------------------------------------------------
+./server/package.json { write "type":"module" to allow import of modules in index.js}
+---------------------------------------------------------------------------------------------------------------------------
+NOTE : Add current IP to mongoDB database online to start connect 
+---------------------------------------------------------------------------------------------------------------------------
 Social Media Application (MERN Stack):
 Frontend: React.js
 Backend: Express.js
@@ -21,12 +30,4 @@ Key Libraries and Tools:
       morgan: HTTP request logger middleware.
       jsonwebtoken: Generating and verifying JSON Web Tokens (JWT).
       mongoose: MongoDB object modeling for Node.js.
----------------------------------------------------------------------------------------------------------------------------
-npm i -g nodemon 
----------------------------------------------------------------------------------------------------------------------------
-npm i express body-parser bcrypt cors dotenv gridfs-stream multer multer-gridfs-storage helmet morgan jsonwebtoken mongoose
----------------------------------------------------------------------------------------------------------------------------
-./server/package.json { write "type":"module" to allow import of modules in index.js}
----------------------------------------------------------------------------------------------------------------------------
-NOTE : Add current IP to mongoDB database online to start connect 
----------------------------------------------------------------------------------------------------------------------------
+
