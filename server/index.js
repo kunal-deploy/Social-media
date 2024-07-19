@@ -31,7 +31,7 @@ app.use( bodyParser.json( {limit : "30mb" , extended : true})); // extended = tr
 app.use( bodyParser.urlencoded( { limit :"30mb" , extended: true})); // It is specifically designed to parse URL-encoded data in the request body. URL-encoded data is typically sent by browsers when submitting form data.
 app.use( 
     cors ({
-        origin: "*",
+        origin: "https://social-media-frontend-git-main-kunal-deploys-projects.vercel.app/",
         methods: ["GET", "POST"],
         allowedHeaders: [""],
         credentials: true
