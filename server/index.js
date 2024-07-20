@@ -32,8 +32,7 @@ app.use( bodyParser.urlencoded( { limit :"30mb" , extended: true})); // It is sp
 app.use(
     cors ({
         origin: "*",
-        methods: ["GET", "POST"],
-        credentials: true
+        methods: ["GET", "POST","PATCH"],
     })
 ) ; //invokes the cross origin sharing policies in line 20
 app.use( "/assets" , express.static(path.join( __dirname , 'public/assets'))); // assigns a subdomain assets and stores files received in there to the directory received from dirname and further path ahead that is public/assets
