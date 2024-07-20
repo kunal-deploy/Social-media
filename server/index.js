@@ -29,14 +29,13 @@ app.use(helmet.crossOriginResourcePolicy( { policy : "cross-origin" } )); // all
 app.use(morgan("common")); // setting the HTTP information format to be common 
 app.use( bodyParser.json( {limit : "30mb" , extended : true})); // extended = true allows you to parse complex json data structures which includes the commons ones(strings ,integers , etc.) but not limited to them
 app.use( bodyParser.urlencoded( { limit :"30mb" , extended: true})); // It is specifically designed to parse URL-encoded data in the request body. URL-encoded data is typically sent by browsers when submitting form data.
-app.use(cors(
+app.use(
     cors ({
         origin: "*",
         methods: ["GET", "POST"],
-        allowedHeaders: [""],
         credentials: true
     })
-)) ; //invokes the cross origin sharing policies in line 20
+) ; //invokes the cross origin sharing policies in line 20
 app.use( "/assets" , express.static(path.join( __dirname , 'public/assets'))); // assigns a subdomain assets and stores files received in there to the directory received from dirname and further path ahead that is public/assets
 
 //STORAGE
@@ -73,8 +72,8 @@ const PORT = process.env.PORT || 6001 ;
 mongoose.connect( process.env.MONGO_URL 
 ).then( () => {
     app.listen( PORT , () => console.log(`SERVER Port at : ${PORT}`));
-    // User.insertMany( users );
-    // Post.insertMany( posts ); // Ran these two lines once to upload data to mongodb
+    User.insertMany( users );
+    Post.insertMany( posts ); // Ran these two lines once to upload data to mongodb
 
 }).catch( error => { `${error} did not connect`});
 export default  app;
