@@ -29,14 +29,7 @@ app.use(helmet.crossOriginResourcePolicy( { policy : "cross-origin" } )); // all
 app.use(morgan("common")); // setting the HTTP information format to be common 
 app.use( bodyParser.json( {limit : "30mb" , extended : true})); // extended = true allows you to parse complex json data structures which includes the commons ones(strings ,integers , etc.) but not limited to them
 app.use( bodyParser.urlencoded( { limit :"30mb" , extended: true})); // It is specifically designed to parse URL-encoded data in the request body. URL-encoded data is typically sent by browsers when submitting form data.
-app.use( 
-    cors ({
-        origin: "https://social-media-frontend-git-main-kunal-deploys-projects.vercel.app/",
-        methods: ["GET", "POST"],
-        allowedHeaders: [""],
-        credentials: true
-    })
-) ; //invokes the cross origin sharing policies in line 20
+app.use(cors()) ; //invokes the cross origin sharing policies in line 20
 app.use( "/assets" , express.static(path.join( __dirname , 'public/assets'))); // assigns a subdomain assets and stores files received in there to the directory received from dirname and further path ahead that is public/assets
 
 //STORAGE
@@ -48,6 +41,11 @@ const storage = multer.diskStorage({
         cb(null , file.originalname);  // he cb function provided to filename is also a callback function that should be called with either an error (if any) or the filename. In your case, you pass null for the error (cb(null, file.originalname)).
     }
 })
+app.get('/', (req, res) => {
+    res.json({
+      message: '🦄🌈✨👋🌎🌍🌏✨🌈🦄',
+    });
+  });
 
 const upload = multer({storage}); // Variable created to upload a file via variable storage 
 
@@ -72,3 +70,4 @@ mongoose.connect( process.env.MONGO_URL
     Post.insertMany( posts ); // Ran these two lines once to upload data to mongodb
 
 }).catch( error => { `${error} did not connect`});
+export default  app;
