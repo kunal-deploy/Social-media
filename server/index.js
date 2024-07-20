@@ -66,8 +66,8 @@ const PORT = process.env.PORT || 6001 ;
 mongoose.connect( process.env.MONGO_URL 
 ).then( () => {
     app.listen( PORT , () => console.log(`SERVER Port at : ${PORT}`));
-    User.insertMany( users );
-    Post.insertMany( posts ); // Ran these two lines once to upload data to mongodb
+    // User.insertMany( users );
+    // Post.insertMany( posts ); // Ran these two lines once to upload data to mongodb
 
 }).catch( error => { `${error} did not connect`});
 export default  app;
