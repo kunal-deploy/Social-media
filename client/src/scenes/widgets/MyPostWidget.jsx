@@ -43,6 +43,7 @@ const MyPostWidget = ({ picturePath }) => {
     // console.log(values['picture'].name);
     const blob = await put(image.name, file, {
       access: 'public',
+      token: 'vercel_blob_rw_9124jy5iafIvOlFf_d9jGY5ySCqvSmwIQ2A18TjjN1uKZNR',
     });
     // console.log(blob.url);
     return blob;
