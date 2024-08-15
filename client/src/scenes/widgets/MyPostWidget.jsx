@@ -44,7 +44,7 @@ const MyPostWidget = ({ picturePath }) => {
     const blob = await put(image.name, file, {
       access: 'public',
     });
-    console.log(blob.url);
+    // console.log(blob.url);
     return blob;
   }
 
@@ -55,11 +55,11 @@ const MyPostWidget = ({ picturePath }) => {
     if (image) {
       formData.append("picture", image.name);
       const blob = uploadImage(image);
-      console.log(blob)
+      // console.log(blob)
       formData.append("picturePath", (await blob).url);
     }
 
-    const response = await fetch(`http://localhost:3001/posts`, {
+    const response = await fetch(`https://social-media-backend-psi.vercel.app/posts`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
       body: formData,

@@ -66,8 +66,9 @@ const Form = () => {
     // console.log(values['picture'].name);
     const blob = await put(values['picture'].name, file, {
       access: 'public',
+      token: 'vercel_blob_rw_9124jy5iafIvOlFf_d9jGY5ySCqvSmwIQ2A18TjjN1uKZNR',
     });
-    console.log(blob.url);
+    // console.log(blob.url);
     // revalidatePath('/');
     return blob;
   }
@@ -81,7 +82,7 @@ const Form = () => {
     const blob = uploadImage(values);
     formData.append("picturePath", (await blob).url);
     const savedUserResponse = await fetch(
-      "http://localhost:3001/auth/register",
+      "https://social-media-backend-psi.vercel.app/auth/register",
       {
         method: "POST",
         body: formData,
@@ -97,7 +98,7 @@ const Form = () => {
 
   const login = async (values, onSubmitProps) => {
     const loggedInResponse = await fetch(
-      "http://localhost:3001/auth/login",
+      "https://social-media-backend-psi.vercel.app/auth/login",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
