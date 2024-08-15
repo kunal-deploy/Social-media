@@ -35,7 +35,7 @@ const PostWidget = ({
   const primary = palette.primary.main;
 
   const patchLike = async () => {
-    const response = await fetch(`https://social-media-backend-git-main-kunal-deploys-projects.vercel.app/posts/${postId}/like`, {
+    const response = await fetch(`http://localhost:3001/posts/${postId}/like`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -58,14 +58,23 @@ const PostWidget = ({
       <Typography color={main} sx={{ mt: "1rem" }}>
         {description}
       </Typography>
-      {picturePath && (
+      {console.log(picturePath)}
+      {picturePath &&( (picturePath.startsWith("http")) ? (
         <img
           width="100%"
           height="auto"
-          alt="post"
+          alt="http post"
           style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }}
-          src={`https://social-media-backend-git-main-kunal-deploys-projects.vercel.app/assets/${picturePath}`}
+          src={picturePath}
         />
+      ) :
+        (<img
+          width="100%"
+          height="auto"
+          alt= {`post ${picturePath.url}`}
+          style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }}
+          src={`http://localhost:3001/assets/${picturePath}`}
+        />)
       )}
       <FlexBetween mt="0.25rem">
         <FlexBetween gap="1rem">

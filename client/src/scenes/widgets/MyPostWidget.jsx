@@ -24,10 +24,12 @@ import WidgetWrapper from "components/WidgetWrapper";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "state";
+import { put } from '@vercel/blob';
 
 const MyPostWidget = ({ picturePath }) => {
   const dispatch = useDispatch();
   const [isImage, setIsImage] = useState(false);
+  const [file, setFile] = useState();
   const [image, setImage] = useState(null);
   const [post, setPost] = useState("");
   const { palette } = useTheme();
@@ -37,16 +39,27 @@ const MyPostWidget = ({ picturePath }) => {
   const mediumMain = palette.neutral.mediumMain;
   const medium = palette.neutral.medium;
 
+  async function uploadImage(image) {
+    // console.log(values['picture'].name);
+    const blob = await put(image.name, file, {
+      access: 'public',
+    });
+    console.log(blob.url);
+    return blob;
+  }
+
   const handlePost = async () => {
     const formData = new FormData();
     formData.append("userId", _id);
     formData.append("description", post);
     if (image) {
-      formData.append("picture", image);
-      formData.append("picturePath", image.name);
+      formData.append("picture", image.name);
+      const blob = uploadImage(image);
+      console.log(blob)
+      formData.append("picturePath", (await blob).url);
     }
 
-    const response = await fetch(`https://social-media-backend-git-main-kunal-deploys-projects.vercel.app/posts`, {
+    const response = await fetch(`http://localhost:3001/posts`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
       body: formData,
@@ -83,7 +96,7 @@ const MyPostWidget = ({ picturePath }) => {
           <Dropzone
             acceptedFiles=".jpg,.jpeg,.png"
             multiple={false}
-            onDrop={(acceptedFiles) => setImage(acceptedFiles[0])}
+            onDrop={(acceptedFiles) => {setImage(acceptedFiles[0]); setFile(acceptedFiles[0])}}
           >
             {({ getRootProps, getInputProps }) => (
               <FlexBetween>

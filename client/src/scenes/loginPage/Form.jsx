@@ -17,6 +17,10 @@ import Dropzone from "react-dropzone";
 import FlexBetween from "components/FlexBetween";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { put } from '@vercel/blob';
+// import dotenv from "dotenv";
+// // import { revalidatePath } from 'next/cache';
+// dotenv.config()
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
@@ -50,6 +54,7 @@ const initialValuesLogin = {
 
 const Form = () => {
   const [pageType, setPageType] = useState("login");
+  const [file, setFile] = useState();
   const { palette } = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -57,16 +62,26 @@ const Form = () => {
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
 
+  async function uploadImage(values) {
+    // console.log(values['picture'].name);
+    const blob = await put(values['picture'].name, file, {
+      access: 'public',
+    });
+    console.log(blob.url);
+    // revalidatePath('/');
+    return blob;
+  }
+
   const register = async (values, onSubmitProps) => {
     // this allows us to send form info with image
     const formData = new FormData();
     for (let value in values) {
       formData.append(value, values[value]);
     }
-    formData.append("picturePath", values.picture.name);
-
+    const blob = uploadImage(values);
+    formData.append("picturePath", (await blob).url);
     const savedUserResponse = await fetch(
-      "https://social-media-backend-git-main-kunal-deploys-projects.vercel.app/auth/register",
+      "http://localhost:3001/auth/register",
       {
         method: "POST",
         body: formData,
@@ -82,7 +97,7 @@ const Form = () => {
 
   const login = async (values, onSubmitProps) => {
     const loggedInResponse = await fetch(
-      "https://social-media-backend-git-main-kunal-deploys-projects.vercel.app/auth/login",
+      "http://localhost:3001/auth/login",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -105,7 +120,8 @@ const Form = () => {
   const handleFormSubmit = async (values, onSubmitProps) => {
     if (isLogin) await login(values, onSubmitProps);
     notify();
-    if (isRegister) await register(values, onSubmitProps);
+    // if (isRegister) await uploadImage(values);
+    if (isRegister) await register(values, onSubmitProps) ;
   };
 
   const notify = () =>
@@ -113,9 +129,6 @@ const Form = () => {
       "New user registration is disabled due to database limitations, We apologize for the inconvience"
     );
 
-  // useEffect(() => {
-  //   notify();
-  // }, []);
 
   return (
     <div>
@@ -202,8 +215,10 @@ const Form = () => {
                     <Dropzone
                       acceptedFiles=".jpg,.jpeg,.png"
                       multiple={false}
-                      onDrop={(acceptedFiles) =>
+                      onDrop={(acceptedFiles) =>{
                         setFieldValue("picture", acceptedFiles[0])
+                        setFile(acceptedFiles[0])
+                        }
                       }
                     >
                       {({ getRootProps, getInputProps }) => (

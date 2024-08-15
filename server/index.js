@@ -48,7 +48,7 @@ const storage = multer.diskStorage({
 })
 app.get('/', (req, res) => {
     res.json({
-      message: '🦄🌈✨👋🌎🌍🌏✨🌈🦄',
+      message: '🦄🌈✨🌎HOSTED🌏✨🌈🦄',
     });
   });
 
@@ -68,7 +68,7 @@ app.use("/posts" , postRoutes);
 // MONGOOSE SETUP 
 const PORT = process.env.PORT || 6001 ;
 // NOTE : Add current IP to mongoDB database online to start connect 
-mongoose.connect( process.env.MONGO_URL 
+mongoose.connect( process.env.MONGODB_URI 
 ).then( () => {
     app.listen( PORT , () => console.log(`SERVER Port at : ${PORT}`));
     // User.insertMany( users );
