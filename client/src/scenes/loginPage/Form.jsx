@@ -82,7 +82,7 @@ const Form = () => {
     const blob = uploadImage(values);
     formData.append("picturePath", (await blob).url);
     const savedUserResponse = await fetch(
-      "https://backend-deployed.vercel.app//auth/register",
+      "https://backend-deployed.vercel.app/auth/register",
       {
         method: "POST",
         body: formData,
@@ -98,7 +98,7 @@ const Form = () => {
 
   const login = async (values, onSubmitProps) => {
     const loggedInResponse = await fetch(
-      "https://backend-deployed.vercel.app//auth/login",
+      "https://backend-deployed.vercel.app/auth/login",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -286,9 +286,6 @@ const Form = () => {
               <Typography
                 onClick={() => {
                   setPageType(isLogin ? "register" : "login");
-                  if (isLogin) {
-                    notify();
-                  }
                   resetForm();
                 }}
                 sx={{

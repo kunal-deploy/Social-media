@@ -59,7 +59,7 @@ const MyPostWidget = ({ picturePath }) => {
       formData.append("picturePath", (await blob).url);
     }
 
-    const response = await fetch(`https://backend-deployed.vercel.app//posts`, {
+    const response = await fetch(`https://backend-deployed.vercel.app/posts`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
       body: formData,
