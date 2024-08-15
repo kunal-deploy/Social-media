@@ -82,7 +82,7 @@ const Form = () => {
     const blob = uploadImage(values);
     formData.append("picturePath", (await blob).url);
     const savedUserResponse = await fetch(
-      "https://social-media-backend-psi.vercel.app/auth/register",
+      "https://social-media-backend-git-main-kunal-deploys-projects.vercel.app/auth/register",
       {
         method: "POST",
         body: formData,
@@ -98,7 +98,7 @@ const Form = () => {
 
   const login = async (values, onSubmitProps) => {
     const loggedInResponse = await fetch(
-      "https://social-media-backend-psi.vercel.app/auth/login",
+      "https://social-media-backend-git-main-kunal-deploys-projects.vercel.app/auth/login",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

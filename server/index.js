@@ -39,12 +39,12 @@ app.use( "/assets" , express.static(path.join( __dirname , 'tmp/'))); // assigns
 
 //STORAGE
 const storage = multer.diskStorage({
-    destination :   function( req , file , cb){
-        cb( null , "tmp/"); //The cb (callback) function is provided with two arguments: err and the path to the destination directory ("public/assets" in this case). If there's an error, you can pass the error to cb(err), otherwise, pass null.
-    },
-    filename : function( req , file , cb  ){ //This option is a function that determines the name of the uploaded file when it's saved to the server. In your code, the filename is set to file.originalname, which means the uploaded file will retain its original name.
-        cb(null , file.originalname);  // he cb function provided to filename is also a callback function that should be called with either an error (if any) or the filename. In your case, you pass null for the error (cb(null, file.originalname)).
-    }
+    // destination :   function( req , file , cb){
+    //     cb( null , "tmp/"); //The cb (callback) function is provided with two arguments: err and the path to the destination directory ("public/assets" in this case). If there's an error, you can pass the error to cb(err), otherwise, pass null.
+    // },
+    // filename : function( req , file , cb  ){ //This option is a function that determines the name of the uploaded file when it's saved to the server. In your code, the filename is set to file.originalname, which means the uploaded file will retain its original name.
+    //     cb(null , file.originalname);  // he cb function provided to filename is also a callback function that should be called with either an error (if any) or the filename. In your case, you pass null for the error (cb(null, file.originalname)).
+    // }
 })
 app.get('/', (req, res) => {
     res.json({
