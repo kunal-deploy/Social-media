@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 const UserImage = ({ image, size = "60px" }) => {
   return (
     <Box width={size} height={size}>
-      {image.startsWith("http") ? (
+      {image && (image.startsWith("http") ? (
         <img
         style={{ objectFit: "cover", borderRadius: "50%" }}
         width={size}
@@ -19,7 +19,7 @@ const UserImage = ({ image, size = "60px" }) => {
         alt="user"
         src={`https://backend-deployed.vercel.app/assets/${image}`}
       />
-      )}
+      ))}
       
     </Box>
   );
